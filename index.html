@@ -188,6 +188,16 @@
   .shop-card .add:hover{background:var(--charcoal);color:var(--cream);}
   .shop-card .add.added{background:var(--forest);border-color:var(--forest);color:#fff;}
   .shop-note{text-align:center;max-width:560px;margin:48px auto 0;font-size:13.5px;color:#8a857c;font-style:italic;}
+  .market{max-width:660px;margin:0 auto;background:var(--vanilla);border:1px solid var(--oat);border-radius:10px;padding:40px 34px;text-align:center;}
+  .market-tag{font-family:'Work Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--persimmon);margin-bottom:12px;}
+  .market-name{font-family:'Fraunces',serif;font-weight:500;font-size:30px;margin:0 0 6px;}
+  .market-addr{font-size:14px;color:#54514b;margin-bottom:28px;letter-spacing:.02em;}
+  .market-dates{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;}
+  .market-dates .md{background:var(--cream);border:1px solid var(--oat);border-radius:8px;width:76px;padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .market-dates .mo{font-family:'Work Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--persimmon);font-weight:600;}
+  .market-dates .dy{font-family:'Fraunces',serif;font-size:28px;font-weight:500;color:var(--charcoal);line-height:1;}
+  .sku .at-market{margin-top:auto;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--persimmon);padding-top:8px;}
+  .shop-card .at-market{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--persimmon);}
 
   /* ---------- Recipes ---------- */
   .recipes{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
@@ -265,9 +275,8 @@
     <nav class="navlinks" id="navlinks">
       <a data-go="home">Home</a>
       <a data-go="story">Our Story</a>
-      <a data-go="shop">Shop</a>
+      <a data-go="shop">Find Us</a>
       <a data-go="recipes">Recipes</a>
-      <div class="cart" data-go="shop"><span>Cart</span><span class="count" id="cartCount">0</span></div>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -285,7 +294,7 @@
           <h1>Delegate the prep.<span class="l2">Own the moment.</span></h1>
           <p class="lead">We finish the first fifteen minutes of any recipe &mdash; onion, carrot, celery brought to translucence in olive oil and sea salt, pre-portioned and frozen at peak. You build from a foundation of craft, even on hour ten of a long day.</p>
           <div class="hero-cta">
-            <a class="btn" data-go="shop">Shop the family</a>
+            <a class="btn" data-go="shop">Find us at the market</a>
             <a class="btn ghost" href="#how">See how it works</a>
           </div>
         </div>
@@ -378,12 +387,30 @@
   <section class="section-cream">
     <div class="wrap">
       <div class="shead reveal">
-        <p class="eyebrow">Shop &middot; Maillard&trade; Flavor Foundations</p>
-        <h2>Five foundations. <span class="ital">$12 each.</span></h2>
-        <p>Every container holds 12 oz &mdash; four pre-portioned 3 oz segments. Use one, re-seal the rest. Ships frozen.</p>
+        <p class="eyebrow">Find Us</p>
+        <h2>Meet us at <span class="ital">the market.</span></h2>
+        <p>Online ordering is on its way. For now, the best way to get Maillard &mdash; and to say hello &mdash; is in person.</p>
+      </div>
+
+      <div class="market reveal">
+        <div class="market-tag">This season</div>
+        <h3 class="market-name">Haddonfield Farmers Market</h3>
+        <p class="market-addr">2 Kings Court &middot; Haddonfield, NJ 08033 &middot; Saturdays &middot; 8:30am&ndash;1:00pm</p>
+        <div class="market-dates">
+          <div class="md"><span class="mo">Jul</span><span class="dy">25</span></div>
+          <div class="md"><span class="mo">Aug</span><span class="dy">15</span></div>
+          <div class="md"><span class="mo">Sep</span><span class="dy">12</span></div>
+          <div class="md"><span class="mo">Oct</span><span class="dy">10</span></div>
+        </div>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=2+Kings+Court+Haddonfield+NJ+08033" target="_blank" rel="noopener">Get directions</a>
+      </div>
+
+      <div class="shead reveal" style="margin-top:84px;">
+        <p class="eyebrow">At our table</p>
+        <h2>What you&rsquo;ll <span class="ital">find.</span></h2>
+        <p>Each foundation is $12 &mdash; 12 oz, four pre-portioned 3 oz segments. Use one, re-seal the rest.</p>
       </div>
       <div class="shop-grid" id="shopGrid"></div>
-      <p class="shop-note">Add to cart is a live preview while the shop is being finished.</p>
     </div>
   </section>
 </div>
@@ -410,7 +437,7 @@
       <div class="foot-nav">
         <a data-go="home">Home</a>
         <a data-go="story">Our Story</a>
-        <a data-go="shop">Shop</a>
+        <a data-go="shop">Find Us</a>
         <a data-go="recipes">Recipes</a>
       </div>
     </div>
@@ -460,9 +487,6 @@
      tip:"A splash of the reserved pasta water is the difference between a sauce that clings and one that breaks."}
   ];
 
-  var cart=0;
-  function addToCart(btn){cart++;document.getElementById('cartCount').textContent=cart;btn.classList.add('added');btn.textContent='Added \u2713';setTimeout(function(){btn.classList.remove('added');btn.textContent=btn.dataset.label;},1400);}
-
   /* Build home SKU cards */
   (function(){
     var h=document.getElementById('homeSkus'),s=document.getElementById('shopGrid');
@@ -470,12 +494,12 @@
       h.insertAdjacentHTML('beforeend',
         '<div class="sku reveal"><div class="band" style="background:'+k.band+'"><div class="no">'+k.no+'</div><div class="nm">'+k.name+'</div></div>'+
         '<div class="field"><div class="ing">'+k.ing+'</div><div class="pr">$12</div>'+
-        '<button class="add" data-label="Add to cart" onclick="addToCart(this)">Add to cart</button></div></div>');
+        '<div class="at-market">At the market</div></div></div>');
       s.insertAdjacentHTML('beforeend',
         '<div class="shop-card reveal"><div class="band" style="background:'+k.band+'"><div class="no">'+k.no+'</div><div class="nm">'+k.name+'</div></div>'+
         '<div class="body"><div class="ing">'+k.ing+'</div><div class="desc">'+k.desc+'</div>'+
         '<div class="meta">12 oz &middot; four 3 oz segments &middot; ships frozen</div>'+
-        '<div class="row"><span class="pr">$12</span><button class="add" data-label="Add to cart" onclick="addToCart(this)">Add to cart</button></div></div></div>');
+        '<div class="row"><span class="pr">$12</span><span class="at-market">At the market</span></div></div></div>');
     });
   })();
 
